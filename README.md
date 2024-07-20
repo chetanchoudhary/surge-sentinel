@@ -13,5 +13,3 @@ Surge Sentinel is a powerful, user-friendly load testing tool designed to help d
 ## Usage
 
 ## Contributing
-
-## License

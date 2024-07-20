@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "surge-sentinel"
+version = "0.1.0"
+description = "Surge Sentinel is a powerful, user-friendly load testing tool designed to help developers and QA engineers assess the performance and reliability of their APIs under various levels of stress."
+authors = ["Chetan Choudhary"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.111.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
