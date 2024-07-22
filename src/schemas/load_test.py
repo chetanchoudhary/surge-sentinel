@@ -4,7 +4,6 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, HttpUrl
 
 
-# TestConfig schemas
 class DynamicField(BaseModel):
     type: str
     values: Optional[List[Any]] = None
@@ -12,13 +11,15 @@ class DynamicField(BaseModel):
 
 class TestConfigBase(BaseModel):
     name: str
-    url: HttpUrl
+    url: str
     method: str
     headers: Optional[Dict[str, str]] = None
     payload_template: Optional[Dict[str, Any]] = None
     dynamic_fields: Optional[Dict[str, DynamicField]] = None
     num_requests: int
     concurrency: int
+    use_proxies: bool = False
+    proxy_rotation_strategy: str = "round_robin"
 
 
 class TestConfigCreate(TestConfigBase):
@@ -38,15 +39,15 @@ class TestConfig(TestConfigBase):
         from_attributes = True
 
 
-# TestResult schemas
 class TestResultBase(BaseModel):
     config_id: int
     total_requests: int
     successful_requests: int
     failed_requests: int
-    average_response_time: float
-    status_code_distribution: Dict[str, int]
-    error_messages: List[str]
+    average_response_time: Optional[float] = None
+    status_code_distribution: Optional[Dict[str, int]] = None
+    error_messages: Optional[List[str]] = None
+    proxy_performance: Optional[Dict[str, float]] = None
 
 
 class TestResultCreate(TestResultBase):
@@ -68,7 +69,7 @@ class RunTestRequest(BaseModel):
 
 class RunTestResponse(BaseModel):
     message: str
-    test_id: int
+    test_id: str
 
 
 class TestResultResponse(BaseModel):
@@ -80,4 +81,12 @@ class TestConfigResponse(BaseModel):
 
 
 class DeleteTestConfigResponse(BaseModel):
+    message: str
+
+
+class ProxyRequest(BaseModel):
+    url: HttpUrl
+
+
+class ProxyResponse(BaseModel):
     message: str

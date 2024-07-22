@@ -3,13 +3,26 @@ name = "surge-sentinel"
 version = "0.1.0"
 description = "Surge Sentinel is a powerful, user-friendly load testing tool designed to help developers and QA engineers assess the performance and reliability of their APIs under various levels of stress."
 authors = ["Chetan Choudhary"]
-license = "MIT"
+license = "LICENSE"
 readme = "README.md"
+packages = [{ include = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = "^0.111.1"
+uvicorn = {extras = ["standard"], version = "^0.30.1"}
+alembic = "^1.13.2"
+pydantic = {extras = ["dotenv"], version = "^2.8.2"}
+pydantic-settings = "^2.3.3"
+loguru = "^0.7.2"
+python-dotenv = "^1.0.1"
+sqlalchemy = { extras = ["async"], version = "^2.0.15" }
+asyncpg = "^0.29.0"
+httpx = "^0.27.0"
 
+
+[tool.poetry.scripts]
+start = "src.main:start"
 
 [build-system]
 requires = ["poetry-core"]
